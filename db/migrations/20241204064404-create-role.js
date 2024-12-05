@@ -2,21 +2,21 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('users', {
+    await queryInterface.createTable('Roles', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      password: {
-        type: Sequelize.STRING
+      role_name: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true
       },
-      username: {
-        type: Sequelize.STRING
-      },
-      email: {
-        type: Sequelize.STRING
+      role_description: {
+        type: Sequelize.STRING,
+        allowNull: true
       },
       createdAt: {
         allowNull: false,
@@ -25,19 +25,10 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
-      },
+      }
     });
-    // await queryInterface.addColumn(User.users, 'token', {
-    //   type: Sequelize.TEXT,
-    //   allowNull: true,
-    // }, {
-    //   transaction,
-    // });
   },
-  
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('users');
-
-
+    await queryInterface.dropTable('Roles');
   }
 };

@@ -1,6 +1,8 @@
 const express = require('express');
 const sequelize = require('./db_connection');
 const userRoutes = require('./Routes/userRoute');
+const roleRoute= require("./Routes/roleRoute");
+const permissionRoute= require("./Routes/permissionRoute");
 const bodyParser = require('body-parser');
 
 
@@ -13,6 +15,8 @@ app.use(bodyParser.json());
 
 // Routes
 app.use('/api', userRoutes);
+app.use('/api', roleRoute);
+app.use('/api', permissionRoute);
 
 // Test Database Connection
 sequelize.authenticate()
