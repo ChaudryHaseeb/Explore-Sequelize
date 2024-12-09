@@ -86,23 +86,24 @@ const User=db.User;
       }
     
       const encryptedPassword = await bcrypt.hash(password, 10);
-     const user =  await User.create({
+       await User.create({
         username: username,
         email: email,
         password: encryptedPassword,
         confirm_password: confirm_password,
-        });
+          });
 
           const  roleData=await db.Role.findOne({ where: { role_name: role_name }});
-         // const  userData=await User.findOne({ where: { username: username },  raw: true });
+          const  userData=await User.findOne({ where: { username: username },  raw: true });
           
-
+  console.log("userData===============",userData);
+  console.log("userData===============",userData.id);
           
-  console.log("userData===============",roleData);
-  console.log("userData===============",roleData.id);
+  console.log("Data===============",roleData);
+  console.log("roleData===============",roleData.id);
           
           const userRole =  [{
-            user_id: user.id,
+            user_id: userData.id,
             role_id: roleData.id,
             createdAt: new Date(),
             updatedAt: new Date(),

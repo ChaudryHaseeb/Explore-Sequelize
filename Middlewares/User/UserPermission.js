@@ -4,7 +4,8 @@ const ViewUser = async function (req, res, next) {
     return func.sendResponse(is_assigned, res, next)
 }
 const CreateUser = async function (req, res, next) {
-    let is_assigned = await func.isAssigned(req, 'user_create');
+    let is_assigned = await func.isAssigned(req, 'user_create')
+    console.log("is assigned ",is_assigned);
     return func.sendResponse(is_assigned, res, next)
 }
 const UpdateUser = async function (req, res, next) {
