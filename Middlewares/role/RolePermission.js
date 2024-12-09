@@ -15,15 +15,9 @@ const DeleteRole = async function (req, res, next) {
     let is_assigned = await func.isAssigned(req, 'delete_role');
     return func.sendResponse(is_assigned, res, next)
 }
-const PrintRole = async function (req, res, next) {
-    let is_assigned = await func.isAssigned(req, 'print_role');
-    return func.sendResponse(is_assigned, res, next)
-}
-
 module.exports = {
     ViewRole,
     CreateRole,
     DeleteRole,
     UpdateRole,
-    PrintRole,
 }

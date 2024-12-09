@@ -10,6 +10,7 @@ const auth = require("./../Middlewares/AuthToken");
 const router = express.Router();
 
 router.post("/role",[auth, RoleCreateRequest], roleCreate);
+// router.post("/assign",[auth, RoleCreateRequest], roleCreatebyadmin);
 router.put("/role/:id",auth, roleUpdate);
 
 module.exports = router;

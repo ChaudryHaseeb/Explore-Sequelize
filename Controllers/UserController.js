@@ -74,6 +74,49 @@ const User=db.User;
       { expiresIn: "10h" }
     )
   }
+
+
+  const create =async(req, res)=>{
+    const User=db.User;
+    const user_Role= db.user_role;
+      const {username, email, password, confirm_password, role_name} = req.body;
+      console.log(req.body)
+      if (password !== confirm_password) {
+        return res.status(400).json({ message: "Passwords do not match." });
+      }
+    
+      const encryptedPassword = await bcrypt.hash(password, 10);
+     const user =  await User.create({
+        username: username,
+        email: email,
+        password: encryptedPassword,
+        confirm_password: confirm_password,
+        });
+
+          const  roleData=await db.Role.findOne({ where: { role_name: role_name }});
+         // const  userData=await User.findOne({ where: { username: username },  raw: true });
+          
+
+          
+  console.log("userData===============",roleData);
+  console.log("userData===============",roleData.id);
+          
+          const userRole =  [{
+            user_id: user.id,
+            role_id: roleData.id,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+          }]
+          console.log("uesrRole--------------------------",userRole)
+
+          await user_Role.bulkCreate(userRole);
+
+
+
+       res.status(201).json({message: 'User created and Role assign to this user successfully '})
+    
+        }
+
   
-  module.exports= {Register, Login, get_users, current_user};
+  module.exports= {Register, Login, get_users, current_user, create};
 
