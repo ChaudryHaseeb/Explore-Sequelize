@@ -10,7 +10,7 @@ const router = express.Router();
 router.post('/register',userCreateRequest, Register);
 router.post('/login' ,loginRequest, Login);
 router.get("/me",auth, current_user)
-router.get('/allUser', get_users);
+router.get('/users', auth ,get_users);
 
 
 

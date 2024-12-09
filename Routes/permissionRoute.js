@@ -1,9 +1,11 @@
 const express = require('express');
 const {permissions} = require('../Controllers/PermissionController');
+const auth = require("./../Middlewares/AuthToken");
+
 
 
 const router = express.Router();
 
-router.get("/p", permissions);
+router.get("/permissions",auth , permissions);
 
 module.exports = router;
